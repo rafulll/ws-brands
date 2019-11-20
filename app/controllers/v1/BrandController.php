@@ -48,7 +48,7 @@ final class BrandController
         $cartao = explode(".",$data[0]['numero_cartao'],4);
 
         $a = null;
-        $cod = null;
+      
          
         
         $arrayband = $vdata[0][$data[0]['bandeira']]['cod_bandeira'];
@@ -128,12 +128,7 @@ final class BrandController
         $result=curl_exec($ch);
         $c = json_decode($result);
        
-       $json_errors = array(
-        JSON_ERROR_NONE => 'No_errors',
-        JSON_ERROR_DEPTH => 'Yes, The maximum stack depth has been exceeded',
-        JSON_ERROR_CTRL_CHAR => 'Yes, Control character error, possibly incorrectly encoded',
-        JSON_ERROR_SYNTAX => 'Yes,_Syntax error',
-        );
+      
 
         }
 
