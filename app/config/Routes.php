@@ -30,10 +30,6 @@ final class Routes {
             $app->get("/status", array(BrandController::class, "getStatus"));
             $app->post("/pay", array(BrandController::class, "payC"));
 
-            $app->get("/installment-limits/{brand}", array(BrandController::class, "getOperator"));
-            $app->get("/installment-limits/{brand}/{parcelas}", array(BrandController::class, "getOperator"));
-            $app->get("/cartao/{brand}/{parcelas}", array(BrandController::class, "getOperator"));
-            $app->post("/cartao/{brand}/{parcelas}", array(BrandController::class, "getOperator"));
 
 
             /* Métodos POST */

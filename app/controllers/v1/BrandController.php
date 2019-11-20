@@ -4,7 +4,7 @@ namespace Controllers\V1;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Config\Constants;
+
 
 final class BrandController
 {
@@ -174,97 +174,4 @@ final class BrandController
         return $res->withStatus(200)->withJson($c);
        
     }
-//     public static function getOperator(Request $req, Response $res, array $args)
-//     {
-//         $dados = $req->getParsedBody();
-//         $vdata = [
-
-//             unserialize(BRANDS)
-//         ];
-//         var_dump($dados[0]['operator']);
-//         var_dump($vdata[0][$dados[0]['brand']]['limite_parcelas']);
-//         $limite_parc = strval($vdata[0][$dados[0]['operator']]['limite_parcelas']);
-//         if(!array_key_exists($dados[0]['operator'], $vdata[0][$args['brand']]['operadores_permitidos'])){
-//             $dados = [
-//                 "bandeira"=> $args['brand'],
-//                 "resultado" => "FALHA",
-//                 "detalhes" => "Operadora não permitida",
-//                 "parcelas" => $args['parcelas'],
-//                 "limite_parcelas" => $limite_parc,
-//             ];
-//         }
-//         elseif(!$args['brand'] == $vdata[0][$args['brand']]['bandeira']){
-//             $dados = [
-//                 "bandeira"=> $args['brand'],
-//                 "resultado" => "FALHA",
-//                 "detalhes" => "Bandeira não permitida",
-//                 "parcelas" => $args['parcelas'],
-//                 "limite_parcelas" => $limite_parc,
-//             ];
-//         return $res->withStatus(200)->withJson($dados); 
-
-//         }elseif((int)$args['parcelas'] > $vdata[0][$args['brand']]['limite_parcelas']){
-//             $dados = [
-//                 "bandeira"=> $args['brand'],
-//                 "resultado" => "FALHA",
-//                 "detalhes" => "Parcelas Não Conferem",
-//                 "parcelas" => $args['parcelas'],
-//                 "limite_parcelas" => $limite_parc,
-//             ];
-//             return $res->withStatus(200)->withJson($dados); 
-
-//         }else{
-//             $dados = [
-//                 "bandeira"=> $args['brand'],
-//                 "resultado" => "OK",
-//                 "detalhes" => "Chegou",
-//                 "parcelas" => $args['parcelas'],
-//                 "limite_parcelas" => $limite_parc
-//             ];
-//             return $res->withStatus(200)->withJson($dados); 
-
-//         }
-//         //print_r((int)$args['parcelas']);
-//         //var_dump($vdata[0][$args['brand']]['limite_parcelas']);
-//         return $res->withStatus(200)->withJson($dados); 
-
-
-
-
-//         //         if (!$args['brand'] == $vdata[0][$args['brand']]['bandeira']) {
-           
-//         //     if (isset($args['parcelas'])) {
-
-//         //         if (((int)$args['parcelas']) <= $vdata[0][$args['brand']]['limite_parcelas']) { 
-//         //             $dados = [
-//         //                 "bandeira"=> $args['brand'],
-//         //                 "resultado" => "OK",
-//         //                 "parcelas" => $args['parcelas'],
-//         //                 "limite_parcelas" => $limite_parc
-//         //             ];
-//         //          } else {
-
-//         //              $dados = [
-//         //                 "bandeira"=> $args['brand'],
-//         //                  "resultado" => "falha",
-//         //                  "parcelas" => $args['parcelas'],
-//         //                  "limite_parcelas" => $limite_parc
-//         //              ];
-                    
-//         //          }
-                
-//         //     } else {
-//         //         $dados = [
-//         //             "resultado" => "ok",
-//         //             "limite_parcelas" => $limite_parc
-//         //         ];
-                
-//         //     }
-            
-           
-//         // }
-        
-//         //var_dump($dados);
-//         //var_dump($vdata[0][$args['brand']]['limite_parcelas']);
-// }
 }
