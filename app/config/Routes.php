@@ -4,8 +4,7 @@ namespace Config;
 
 use Slim\App;
 use Controllers\V1\BrandController;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+
 
 final class Routes {
 
@@ -27,8 +26,14 @@ final class Routes {
         $app->group("/v1", function() use ($app) {
 
             /* Métodos GET */
-            $app->get("/status", array(BrandController::class, "getStatus"));
-            $app->post("/pay", array(BrandController::class, "payC"));
+            $app->get(
+                "/status",
+                array(BrandController::class, "getStatus")
+            );
+            $app->post(
+                "/pay",
+                array(BrandController::class, "payC")
+            );
 
 
 

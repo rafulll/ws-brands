@@ -36,35 +36,28 @@ final class BrandController
     public static function payC(Request $req, Response $res, array $args)
     {
         $dados = $req->getParsedBody();
-      //var_dump($dados);
-        // $new_rq = json_encode($dados);
-        // var_dump($new_rq);
+
         $vdata = [
             unserialize(BRANDS)
         ];
         $data[0] = $req->getParsedBody();
-       // var_dump($data[0]['nome_cliente']);
+
         $str = str_replace(' ', '_', $data[0]['nome_cliente']);
         $data[0]['nome_cliente'] = $str;
-       // var_dump($vdata[0][$data[0]['bandeira']]['limite_parcelas']);
+
         $cartao = explode(".",$data[0]['numero_cartao'],4);
-        // echo "cpd cartap";
-        
-        // echo "bandeiras permitidas";
-        // var_dump($vdata[0][$data[0]['bandeira']]['cod_bandeira']);
+
         $a = null;
         $cod = null;
          
         
         $arrayband = $vdata[0][$data[0]['bandeira']]['cod_bandeira'];
-        //var_dump($arrayband);
+      
         $i=0;
-        //para cada bandeira
+       
        foreach ($arrayband as $value ){
             $i++;
-            //var_dump($vdata[0][$data[0]['bandeira']]['limite_parcelas']);
-            //var_dump($value[$i]);
-           //se a bandeira nao existir no operador
+         
             if($cartao[3] != $value){
                 $a = false;
                 $resultado = [
@@ -74,20 +67,13 @@ final class BrandController
                     "parcelas_solicitadas" =>  $dados['parcelas'],
                     "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
                 ];
-                //var_dump($value);
-                //var_dump($cartao[3]);
+                
                 return $res->withStatus(401)->withJson($resultado);
 
             }else{
-               // var_dump($cartao[3]);
-                // var_dump($value);
-                
-              
                
-                //var_dump($value);
                 $a = true;
                 $cod = $value;
-                //var_dump($cod);
                 $resultado = [
                     "resultado" => "OK",
                     "detalhes" => "Sucesso",
@@ -129,7 +115,6 @@ final class BrandController
         else {
                  
         
-        //return $res->withStatus(200)->withJson($dados); 
         $ch = curl_init();
         
         $url="http://localhost/ws-banks/v1/pay";
@@ -141,11 +126,7 @@ final class BrandController
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dados));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result=curl_exec($ch);
-        //array_push($result,["limite_parcelas"=> $vdata[0][$dados['bandeira']]['limite_parcelas']]);
-        //var_dump($result);
         $c = json_decode($result);
-       //var_dump($c);
-      // echo "chegou aqui";
        
        $json_errors = array(
         JSON_ERROR_NONE => 'No_errors',
@@ -153,14 +134,10 @@ final class BrandController
         JSON_ERROR_CTRL_CHAR => 'Yes, Control character error, possibly incorrectly encoded',
         JSON_ERROR_SYNTAX => 'Yes,_Syntax error',
         );
-        //echo 'Json_errors: __ ', $json_errors[json_last_error()], PHP_EOL, PHP_EOL;
-        //var_dump($c);
 
         }
-        //return $res->withStatus(200)->withJson($dados);
 
         $resultado = [
-            //$rq->getParsedBody(),
             "resultado" => "OK",
             "detalhes" => "Sucessoo",
             "bandeira" => $dados['bandeira'],
