@@ -53,10 +53,9 @@ final class BrandController
         
         $arrayband = $vdata[0][$data[0]['bandeira']]['cod_bandeira'];
       
-        $i=0;
        
        foreach ($arrayband as $value ){
-            $i++;
+            
          
             if($cartao[3] != $value){
                 $a = false;
@@ -73,7 +72,7 @@ final class BrandController
             }else{
                
                 $a = true;
-                $cod = $value;
+                
                 $resultado = [
                     "resultado" => "OK",
                     "detalhes" => "Sucesso",

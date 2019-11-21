@@ -22,11 +22,7 @@ define("BRANDS", serialize(
             )
         ),
         "daciolo" => array(
-            "cod_bandeira" =>   array(
-               "3333",
-              
-            ),
-            
+            "cod_bandeira" =>  ["3333"],
             "bandeira" => "daciolo",
             "limite_parcelas" => 4,
             "operadores_permitidos" => array(

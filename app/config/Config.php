@@ -45,6 +45,6 @@ final class Config {
      * será a partir da raiz do sistema.
      */
     private static function setRenderer(Container $container) {
-        $container['renderer'] = new PhpRenderer("./app/views");
+        $container['renderer'] = new PhpRenderer("./views");
     }
 }

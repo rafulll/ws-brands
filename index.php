@@ -2,14 +2,14 @@
 require_once "vendor/autoload.php";
 require_once "env.php";
 require_once "app/config/Constants.php";
-error_reporting(E_ALL ^ E_NOTICE);  
 
 use Slim\App;
+use Psr\Http\Message\MessageInterface as RQ;
 use Config\Config;
 use Config\Routes;
+use Psr\Http\Message\MessageInterface;
 
-
-$app = new App(Config::getSlimConfig());
+$app = new App(MessageInterface);
 
 new Routes($app);
 
