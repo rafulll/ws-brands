@@ -1,7 +1,7 @@
 <?php
 
 namespace Config;
-
+use Slim\App;
 use Slim\Container;
 use Slim\Views\PhpRenderer;
 
