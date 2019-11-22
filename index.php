@@ -9,7 +9,7 @@ use Config\Config;
 use Config\Routes;
 use Psr\Http\Message\MessageInterface;
 
-$app = new App(MessageInterface);
+$app = new App(Config::getSlimConfig());
 
 new Routes($app);
 

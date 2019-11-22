@@ -4,10 +4,7 @@ namespace Controllers\V1;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-
-
-final class BrandController
-{
+final class BrandController{
 
     /**
      * @api {GET} /status Status da API
