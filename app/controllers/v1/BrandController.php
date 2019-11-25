@@ -33,7 +33,7 @@ final class BrandController{
     public static function payC(Request $req, Response $res, array $args)
     {
         $dados = $req->getParsedBody();
-
+   
         $vdata = [
             unserialize(BRANDS)
         ];
@@ -70,76 +70,67 @@ final class BrandController{
                
                 $a = true;
                 
+              
+                if($vdata[0][$dados['bandeira']]['limite_parcelas'] < $dados['parcelas']){
+                    $a = false;
+                    $resultado = [
+                        "resultado" => "Falha",
+                        "detalhes" => "Limite de parcelas nao conferem",
+                        "bandeira" => $data[0]['bandeira'],
+                        "parcelas_solicitadas" =>  $dados['parcelas'],
+                        "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
+                    ];  
+                    return $res->withStatus(401)->withJson($resultado);
+                }elseif($a != true) {
+                    $resultado = [
+                        "resultado" => "Falha",
+                        "detalhes" => "Limite de parcelas nao conferem",
+                        "bandeira" => $data[0]['bandeira'],
+                        "parcelas_solicitadas" =>  $dados['parcelas'],
+                        "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
+                    ];  
+                    return $res->withStatus(401)->withJson($resultado);
+        
+                }
+               
+               
+            //    var_dump($c);
+        
                 $resultado = [
                     "resultado" => "OK",
-                    "detalhes" => "Sucesso",
+                    "detalhes" => "Sucessoo",
                     "bandeira" => $dados['bandeira'],
                     "parcelas_solicitadas" =>  $dados['parcelas'],
                     "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
-                ];
-               
+        
+        
+                ];   
+                $ch = curl_init();
                 
+                $url="http://localhost/ws-banks/v1/pay";
+               
+              
+                curl_setopt($ch, CURLOPT_URL,$url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dados));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result=curl_exec($ch);
+                $c = json_decode($result);
+                
+        
+               
 
+                
             }
             
-          
-          
+
+            return $res->withStatus(200)->withJson($c);
+
 
         }
         
-        if($vdata[0][$dados['bandeira']]['limite_parcelas'] < $dados['parcelas']){
-            $a = false;
-            $resultado = [
-                "resultado" => "Falha",
-                "detalhes" => "Limite de parcelas nao conferem",
-                "bandeira" => $data[0]['bandeira'],
-                "parcelas_solicitadas" =>  $dados['parcelas'],
-                "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
-            ];  
-            return $res->withStatus(401)->withJson($resultado);
-        }if($a != true) {
-            $resultado = [
-                "resultado" => "Falha",
-                "detalhes" => "Limite de parcelas nao conferem",
-                "bandeira" => $data[0]['bandeira'],
-                "parcelas_solicitadas" =>  $dados['parcelas'],
-                "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
-            ];  
-            return $res->withStatus(401)->withJson($resultado);
-
-        }
-        else {
-                 
-        
-        $ch = curl_init();
-        
-        $url="http://localhost/ws-banks/v1/pay";
-       
-      
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dados));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result=curl_exec($ch);
-        $c = json_decode($result);
-       
-      
-
-        }
-
-        $resultado = [
-            "resultado" => "OK",
-            "detalhes" => "Sucessoo",
-            "bandeira" => $dados['bandeira'],
-            "parcelas_solicitadas" =>  $dados['parcelas'],
-            "limite_parcelas" => $vdata[0][$dados['bandeira']]['limite_parcelas']
-
-
-        ];   
-        
-
         return $res->withStatus(200)->withJson($c);
-       
+
     }
 }
